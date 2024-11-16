@@ -28,4 +28,4 @@ This project uses machine learning algorithms to predict land prices by analyzin
 ## Installation
 
 ```bash
-git clone https://github.com/gokulsodar/land-price-prediction
+git clone https://github.com/gokulsodar/land-price-prediction.git
