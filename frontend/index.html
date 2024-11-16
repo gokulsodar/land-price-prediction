@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public\css\styles.css">
+    <script defer src="public\js\script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form id="form" action="#">
+            <h1>USA Land Prices Predictor</h1>
+            <div class="cols">
+                <div class="col1">
+                    <div class="input-control">
+                        <label for="land_area">Land Area (in acres)</label>
+                        <input id="land_area" name="land_area" type="text">
+                        <div class="error" id="error-land_area"></div>
+                    </div>
+                    
+                    <div class="input-control">
+                        <label for="beds">Beds</label>
+                        <input id="beds" name="beds" type="text">
+                        <div class="error" id="error-beds"></div>
+                    </div>
+                    
+                    <div class="input-control">
+                        <label for="bath">Bath</label>
+                        <input id="bath" name="bath" type="text">
+                        <div class="error" id="error-bath"></div>
+                    </div>
+                    
+                    <div class="input-control">
+                        <label for="house_size">House Size</label>
+                        <input id="house_size" name="house_size" type="text">
+                        <div class="error" id="error-house_size"></div>
+                    </div>
+                </div>
+                <div class="col2">
+                    <div class="input-control">
+                        <label for="street">Street</label>
+                        <input id="street" name="street" type="street">
+                        <div class="error"></div>
+                    </div>
+                    <div class="input-control">
+                        <label for="state">State</label>
+                        <select id="state" name="state">
+                            <option value="">Select a state...</option>
+                        </select>
+                        <div class="error"></div>
+                    </div>
+                    
+                    <div class="input-control">
+                        <label for="days_since_sale">Days since sale</label>
+                        <input id="days_since_sale" name="days_since_sale" type="text">
+                        <div class="error" id="error-days_since_sale"></div>
+                    </div>
+                    <div class="input-control">
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="">Select status...</option>
+                        </select>
+                        <div class="error"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="input-control">
+                    <label for="Price">Predicted Price</label>
+                    <input id="Price" name="Price" type="text" readonly>
+                </div>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="predict">Predict</button>
+                <!-- <button type="submit" class="reset">Reset</button> -->
+            </div>
+        </form>
+    </div>
+</body>
+</html>
