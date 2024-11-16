@@ -7,8 +7,148 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../frontend/public/css/styles.css">
-    <script defer src="../frontend/public/js/script.js"></script>
+    <!-- <link rel="stylesheet" href="../frontend/public/css/styles.css"> -->
+    <!-- <script defer src="js/script.js"></script> -->
+    <style>
+                body {
+            /* background: linear-gradient(to right, #0f2027, #203a43, #2c5364); */
+            font-family: 'Poppins', sans-serif;
+            background-image: url('../images/land_pic.jpg');
+            background-size: cover; /* Ensure the image covers the entire background */
+            background-repeat: no-repeat; /* Prevent the image from repeating */
+            background-position: center center; /* Center the image */
+            background-attachment: fixed; /* Make the background fixed when scrolling */
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #form {
+            width: 350px;
+            max-width: 700px;
+            margin: 10vh auto 0 auto;
+            padding: 20px;
+            background-color: whitesmoke;
+            border-radius: 4px;
+            font-size: 12px;
+            /* max-height: 600px; */
+            display: flex;
+            flex-direction: column;      /*just added*/
+        }
+
+
+
+
+
+
+
+        #form h1 {
+            color: #0f2027;
+            text-align: center;
+        }
+
+        #form button {
+            /* padding: 10px; */
+            margin-top: 10px;
+            width: 100%;
+            color: white;
+            background-color: rgb(41, 57, 194);
+            border: none;
+            border-radius: 6px;
+        }
+
+        .input-control {
+            display: flex;
+            flex-direction: column;
+        }
+        .cols {
+            display: flex;
+            flex-direction: row;
+        }
+        .col1 {
+            padding: 0px;
+        }
+        .input-control input {
+            border: 2px solid #f0f0f0;
+            border-radius: 4px;
+            display: block;
+            font-size: 12px;
+            padding: 10px;
+            width: 100%;
+        }
+        .col2 {
+            padding-left: 10px;
+        }
+        .input-control input:focus {
+            outline: 0;
+        }
+
+        .input-control.success input {
+            border-color: #09c372;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .buttons 
+
+        /* .input-control.error input {
+            border-color: #ff3860;
+        }
+
+        .input-control .error {
+            color: #ff3860;
+            font-size: 9px;
+            height: 13px;
+        } */
+
+
+
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+
+        input, select {
+            width: 100%;
+            padding: 9px;
+            margin: 5px 0 15px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #form button.predict:hover {
+            background-color: #45a049;
+            transition: background-color 0.3s ease;
+        }
+        /* #form button.reset:hover {
+            background-color: red;
+            transition: background-color 0.3s ease;
+        } */
+
+        .error-margin {
+            margin-bottom: 5px;
+        }
+
+
+    </style>
+
+
+
 </head>
 <body>
     <div class="container">
@@ -80,5 +220,189 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const states = ['Puerto Rico', 'Virgin Islands', 'Massachusetts', 'Connecticut',
+       'New Hampshire', 'Vermont', 'New Jersey', 'New York',
+       'South Carolina', 'Tennessee', 'Rhode Island', 'Virginia',
+       'Wyoming', 'Maine', 'Georgia', 'Pennsylvania', 'West Virginia',
+       'Delaware', 'Louisiana', 'Ohio', 'California', 'Colorado',
+       'Maryland', 'Missouri', 'District of Columbia', 'Wisconsin',
+       'North Carolina', 'Kentucky', 'Michigan', 'Mississippi', 'Florida',
+       'Alabama', 'New Brunswick', 'Texas', 'Arkansas', 'Idaho',
+       'Indiana', 'Illinois', 'New Mexico', 'Iowa', 'Minnesota',
+       'South Dakota', 'Nebraska', 'North Dakota', 'Montana', 'Oklahoma',
+       'Kansas', 'Oregon', 'Utah', 'Nevada', 'Washington', 'Arizona',
+       'Hawaii', 'Guam', 'Alaska'];
+
+    const statuses = ['For sale', 'Ready to build', 'Sold'];
+
+    const stateSelect = document.getElementById('state');
+    const statusSelect = document.getElementById('status');
+
+    states.forEach(state => {
+        if (state) { // Check to avoid adding 'nan' or empty values
+            const option = document.createElement('option');
+            option.value = state.toLowerCase().replace(/\s+/g, '_');
+            option.textContent = state;
+            stateSelect.appendChild(option);
+        }
+    });
+
+    statuses.forEach(status => {
+        const option = document.createElement('option');
+        option.value = status;
+        option.textContent = status.replace(/_/g, ' '); // Format for display
+        statusSelect.appendChild(option);
+    });
+});
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('form');
+
+    // Add event listeners for real-time validation
+    const inputs = document.querySelectorAll('input[type="text"]');
+    inputs.forEach(input => {
+        input.addEventListener('input', validateInput);
+    });
+
+    // Form submit event
+    form.addEventListener('submit', (event) => {
+        let valid = true;
+
+        // Validate all inputs on submit
+        inputs.forEach(input => {
+            if (!validateInput({ target: input })) {
+                valid = false;
+            }
+        });
+
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
+
+    // Validation function
+    function validateInput(event) {
+        const input = event.target;
+        const errorDiv = document.getElementById(`error-${input.id}`);
+        const value = input.value.trim();
+        let isValid = true;
+
+        if (isNaN(value) || value === '') {
+            errorDiv.textContent = 'Please enter a valid number.';
+            isValid = false;
+        } else {
+            errorDiv.textContent = '';
+        }
+
+        return isValid;
+    }
+});
+
+
+
+
+// // THE CODE BELOW IS FOR SENDING TO FASTAPI SERVER
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const form = document.getElementById('form');
+
+//     form.addEventListener('submit', async (event) => {
+//         event.preventDefault();
+
+//         const formData = new FormData(form);
+//         const data = Object.fromEntries(formData.entries());
+
+//         try {
+//             const response = await fetch('http://localhost:8000/predict', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify(data),
+//             });
+
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+
+//             const result = await response.json();
+//             console.log('Server response:', result);
+//             alert('Data sent successfully. Check server console and browser console for details.');
+//         } catch (error) {
+//             console.error('Error:', error);
+//             alert('There was an error sending the data. Please try again.');
+//         }
+//     });
+// });
+
+
+
+
+
+
+
+
+
+
+
+// NEW TRY TO SEND AND RECEIVE THE DATA
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('form');
+    const priceInput = document.getElementById('Price');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            // const response = await fetch('http://localhost:8000/predict', {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            const predictedPrice = result.predicted_price;
+
+            console.log('Predicted Price:', predictedPrice);
+            
+            // Update the Price input field with the predicted price
+            priceInput.value = `$${predictedPrice.toFixed(2)}`;
+            
+            // alert('Prediction received successfully. Check the form and browser console for details.');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('There was an error getting the prediction. Please try again.');
+            priceInput.value = 'Error: Could not get prediction';
+        }
+    });
+});
+
+
+    </script>
 </body>
 </html>
