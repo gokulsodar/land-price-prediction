@@ -7,6 +7,24 @@ import numpy as np
 
 app = FastAPI()
 
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from pathlib import Path
+
+app = FastAPI()
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="frontend/public"), name="static")
+
+# Serve index.html at root
+@app.get("/")
+async def read_root():
+    return FileResponse('frontend/public/index.html')
+
+# Your existing code stays the same...
+
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
