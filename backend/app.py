@@ -16,12 +16,12 @@ from pathlib import Path
 app = FastAPI()
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="frontend/public"), name="static")
+app.mount("/static", StaticFiles(directory="../frontend/public"), name="static")
 
 # Serve index.html at root
 @app.get("/")
 async def read_root():
-    return FileResponse('frontend/public/index.html')
+    return FileResponse('../frontend/public/index.html')
 
 # Your existing code stays the same...
 
@@ -35,11 +35,11 @@ app.add_middleware(
 )
 
 # Load scalers and model
-bed_scaler = joblib.load(r'model\bed_scaler.pkl')
-bath_scaler = joblib.load(r'model\bath_scaler.pkl')
-acre_lot_scaler = joblib.load(r'model\acre_lot_scaler.pkl')
-house_size_scaler = joblib.load(r'model\house_size_scaler.pkl')
-model = joblib.load(r'model\model.pkl')
+bed_scaler = joblib.load(r'model/bed_scaler.pkl')
+bath_scaler = joblib.load(r'model/bath_scaler.pkl')
+acre_lot_scaler = joblib.load(r'model/acre_lot_scaler.pkl')
+house_size_scaler = joblib.load(r'model/house_size_scaler.pkl')
+model = joblib.load(r'model/model.pkl')
 
 
 # Define the list of states
