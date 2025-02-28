@@ -34,4 +34,3 @@ The challenge here was to achieve high-performance metrics without using **targe
 ```bash
 git clone https://github.com/gokulsodar/land-price-prediction.git
 cd land-price-prediction
-pip install -r requirements.txt
