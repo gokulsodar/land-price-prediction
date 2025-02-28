@@ -15,6 +15,10 @@ This project uses machine learning algorithms to predict land prices by analyzin
 - Price prediction visualization
 - Model performance evaluation
 
+## Challenge
+
+The challenge here was to achieve high-performance metrics without using **target encoding**. Using target encoding made the model's predictions significantly easier due to **data leakage**, so alternative feature engineering techniques were employed to ensure robust and generalizable predictions.
+
 ## Requirements
 
 - Python 3.8+
@@ -29,3 +33,5 @@ This project uses machine learning algorithms to predict land prices by analyzin
 
 ```bash
 git clone https://github.com/gokulsodar/land-price-prediction.git
+cd land-price-prediction
+pip install -r requirements.txt
